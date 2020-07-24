@@ -16,15 +16,15 @@ db.once('open', () => {
 })
 
 
-// const exphbs = require('express-handlebars')
-// const bodyParser = require('body-parser')
+const exphbs = require('express-handlebars')
+const bodyParser = require('body-parser')
 
 
-// app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
-// app.set('view engine', 'handlebars')
+app.engine('hbs', exphbs({ defaultLayout: 'main', extname: '.hbs' }))
+app.set('view engine', 'hbs')
 
 app.get('/', (req, res) => {
-  res.send('hello world!')
+  res.render('index')
 })
 
 app.listen(port, () => {
