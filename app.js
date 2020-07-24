@@ -18,6 +18,7 @@ db.once('open', () => {
 
 const exphbs = require('express-handlebars')
 const bodyParser = require('body-parser')
+app.use(bodyParser.urlencoded({ extended: true }))
 
 
 app.engine('hbs', exphbs({ defaultLayout: 'main', extname: '.hbs' }))
@@ -31,6 +32,16 @@ app.get('/', (req, res) => {
     .catch(error => console.error(error))
 })
 
+app.get('/todos/new', (req, res) => {
+  return res.render('new')
+})//省略return看看
+
+app.post('/todos', (req, res) => {
+  const name = req.body.name
+  return Todo.create({ name })
+    .then(() => res.redirect('/'))
+    .catch(error => console.log(error))
+})
 
 app.listen(port, () => {
   console.log('OK')
