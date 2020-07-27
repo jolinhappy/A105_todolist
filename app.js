@@ -1,26 +1,17 @@
 const express = require('express')
-const mongoose = require('mongoose')
+
 const methodOverride = require('method-override')
 const app = express()
 const port = 3000
 
 const routes = require('./routes')
-
-mongoose.connect('mongodb://localhost/todo-list-new', { useNewUrlParser: true, useUnifiedTopology: true })
-
-const db = mongoose.connection
-
-db.on('error', () => {
-  console.log('mongodb error!')
-})
-
-db.once('open', () => {
-  console.log('mongodb connected')
-})
-
-
 const exphbs = require('express-handlebars')
 const bodyParser = require('body-parser')
+
+require('./config/mongoose')
+
+
+
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))
 app.use(routes)
