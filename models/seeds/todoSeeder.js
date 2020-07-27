@@ -1,5 +1,4 @@
 const Todo = require('../todo')
-mongoose.connect('mongodb://localhost/todo-list-new', { useNewUrlParser: true, useUnifiedTopology: true })
 const db = require('../../config/mongoose')
 
 db.on('error', () => {
